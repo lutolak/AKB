@@ -34,9 +34,9 @@ void stwozNatepniki()
 	for (int i = 0; i < liczbaWierzcholkow; i++) {
 		for (int j = 0; j < liczbaWierzcholkow; j++) {
 			maciezNastepnikow[i][j] = 0;
-			cout << maciezNastepnikow[i][j] << " ";
+			//cout << maciezNastepnikow[i][j] << " ";
 		}
-		cout << endl;
+		cout << "wyzerowano maciez" << endl;
 	}
 }
 void stozPopszedniki()
@@ -73,6 +73,7 @@ void stozPopszedniki()
 		}
 		cout << endl;
 	}
+	cout << endl;
 }
 
 
@@ -241,6 +242,7 @@ int main()
 		}
 		break;
 	}
+	wejscie.close();
 
 	cout << endl << endl;
 	for (int i = 0; i < liczbaWierzcholkow; i++) {
