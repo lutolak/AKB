@@ -38,7 +38,9 @@ void stwozNatepniki()
 		}
 		cout << "wyzerowano maciez" << endl;
 	}
+	cout << endl << endl;
 }
+
 void stozPopszedniki()
 {
 	maciezPopszednikow = new int*[liczbaWierzcholkow];
@@ -76,8 +78,7 @@ void stozPopszedniki()
 	cout << endl;
 }
 
-
-bool sprawdzLinowosc(int i, int j, int k)
+bool sprawdzLinowosc(int wiersz1, int wiersz2, int k)
 {
 	//nastepniki wiersza1 nie powinny byæ powszednikami wiersza2
 	//czy nastepniki a sa powszednikami b?
@@ -85,16 +86,11 @@ bool sprawdzLinowosc(int i, int j, int k)
 	//Za Rybarczyk: 
 	//	je¿eli wieszcho³ki maj¹ wspólne nastêpniki ->
 	//	->	Musz¹ mieæ identyczne zbiory nastêpników AND roz³¹czne zbiory poprzedników
-
-
+	
 	/** sprawdzanie indentycznych nastepnikow*/
 	for (int kolumna = k; kolumna<liczbaWierzcholkow; kolumna++)
 	{
-		if (maciezNastepnikow[i][kolumna] && maciezPopszednikow[j][kolumna])
-		{
-			;
-		}
-		else
+		if ( !(maciezNastepnikow[wiersz1][kolumna] && maciezNastepnikow[wiersz2][kolumna]))
 		{
 			return false;
 		}
@@ -102,11 +98,7 @@ bool sprawdzLinowosc(int i, int j, int k)
 	/**sprawdzanie rozlocznosci zb. powszczednikow*/
 	for (int x = 0; x<liczbaWierzcholkow; x++)
 	{
-		if ((maciezPopszednikow[i][x] != maciezPopszednikow[j][x]) || (maciezPopszednikow[i][x] == 0 && maciezPopszednikow[j][x] == 0))
-		{
-			;
-		}
-		else
+		if ( !((maciezPopszednikow[wiersz1][x] != maciezPopszednikow[wiersz2][x]) || (maciezPopszednikow[wiersz1][x] == 0 && maciezPopszednikow[wiersz2][x] == 0)))
 		{
 			return false;
 		}
@@ -221,7 +213,7 @@ void transformacja()
 
 int main()
 {
-	string nazwaPliku = "sprz1.txt";
+	string nazwaPliku = "kartka.txt";
 	//	cout<<"wprowadz nawzwe pliku"<<endl;
 	//	cin>>nazwaPliku;
 
@@ -267,8 +259,12 @@ int main()
 						{
 							goto F;
 						}
-						jestSprzezony = false;
-						goto S;
+						else
+						{
+							jestSprzezony = false;
+							goto S;
+						}
+						
 					}
 					if (kolumna == liczbaWierzcholkow - 1)
 					{
@@ -278,23 +274,24 @@ int main()
 			}
 			else if (maciezNastepnikow[wiersz1][0] != maciezNastepnikow[wiersz2][0])
 			{
-			F:for (int kolumna = 1; kolumna<liczbaWierzcholkow; kolumna++)
-			{
-				if (maciezNastepnikow[wiersz1][kolumna] != maciezNastepnikow[wiersz2][kolumna] || (maciezNastepnikow[wiersz1][kolumna] == 0 && maciezNastepnikow[wiersz2][kolumna] == 0));
-				else
+			F:
+				for (int kolumna = 1; kolumna<liczbaWierzcholkow; kolumna++)
 				{
-					jestSprzezony = false;
-					goto S;
+					if (!(maciezNastepnikow[wiersz1][kolumna] != maciezNastepnikow[wiersz2][kolumna] || (maciezNastepnikow[wiersz1][kolumna] == 0 && maciezNastepnikow[wiersz2][kolumna] == 0)))//;
+					//else
+					{
+						jestSprzezony = false;
+						goto S;
+					}
+					if (kolumna == liczbaWierzcholkow - 1)
+					{
+						jestSprzezony = true;
+					}
 				}
-				if (kolumna == liczbaWierzcholkow - 1)
-				{
-					jestSprzezony = true;
-				}
-			}
 			}
 		}
 	}
-
+	cout << endl;
 S:;
 
 	/**LINIWOSC*/
@@ -308,9 +305,9 @@ S:;
 		{
 			for (int kolumna = 0; kolumna < liczbaWierzcholkow; kolumna++)
 			{
-				if (maciezNastepnikow[wiersz1][kolumna] == 1 && maciezNastepnikow[wiersz2][kolumna] == 1)
+				if ((maciezNastepnikow[wiersz1][kolumna] == 1) && (maciezNastepnikow[wiersz2][kolumna] == 1))
 				{
-					if (sprawdzLinowosc(wiersz1, wiersz2, kolumna + 1) == true)
+					if (sprawdzLinowosc(wiersz1, wiersz2, kolumna))
 					{
 						jestLiniowy = true;
 						break;

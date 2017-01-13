@@ -19,6 +19,12 @@
     <Text Include="sprz1.txt">
       <Filter>Source Files</Filter>
     </Text>
+    <Text Include="sprz_lin_blarzewicz.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="kartka.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

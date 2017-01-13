@@ -143,8 +143,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="kartka.txt" />
     <Text Include="ReadMe.txt" />
     <Text Include="sprz1.txt" />
+    <Text Include="sprz_lin_blarzewicz.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
