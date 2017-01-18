@@ -78,8 +78,9 @@ void stozPopszedniki()
 	cout << endl;
 }
 
-bool sprawdzLinowosc(int wiersz1, int wiersz2, int k)
+bool sprawdzLinowosc(/*int wiersz1, int wiersz2, int k*/)
 {
+	
 	//nastepniki wiersza1 nie powinny byæ powszednikami wiersza2
 	//czy nastepniki a sa powszednikami b?
 
@@ -88,6 +89,35 @@ bool sprawdzLinowosc(int wiersz1, int wiersz2, int k)
 	//	->	Musz¹ mieæ identyczne zbiory nastêpników AND roz³¹czne zbiory poprzedników
 	
 	/** sprawdzanie indentycznych nastepnikow*/
+	
+	bool bylyRowne = false;
+	for (int wiersz1 = 0; wiersz1 < liczbaWierzcholkow; wiersz1++)
+	{
+		for (int wiersz2 = wiersz1 + 1; wiersz2 < liczbaWierzcholkow; wiersz2++)
+		{
+			for (int kolumna = 0; kolumna < liczbaWierzcholkow; kolumna++)
+			{
+				if ((maciezNastepnikow[wiersz1][kolumna] == 1) || (maciezNastepnikow[wiersz2][kolumna] == 1))
+				{
+					if ((maciezNastepnikow[wiersz1][kolumna] == 1) && (maciezNastepnikow[wiersz2][kolumna] == 1))
+					{
+						bylyRowne = true;
+						continue;
+					}
+					else
+					{
+						if (bylyRowne) return false;
+						else continue;
+					}
+
+				}
+			}
+		}
+	}
+	
+
+	
+	/*
 	for (int kolumna = k; kolumna<liczbaWierzcholkow; kolumna++)
 	{
 		if ( !(maciezNastepnikow[wiersz1][kolumna] && maciezNastepnikow[wiersz2][kolumna]))
@@ -95,7 +125,25 @@ bool sprawdzLinowosc(int wiersz1, int wiersz2, int k)
 			return false;
 		}
 	}
+	*/
 	/**sprawdzanie rozlocznosci zb. powszczednikow*/
+	
+	for (int wiersz1 = 0; wiersz1 < liczbaWierzcholkow; wiersz1++)
+	{
+		for (int wiersz2 = wiersz1 + 1; wiersz2 < liczbaWierzcholkow; wiersz2++)
+		{
+			for (int kolumna = 0; kolumna < liczbaWierzcholkow; kolumna++)
+			{
+				if (maciezPopszednikow[wiersz1][kolumna] == maciezPopszednikow[wiersz2][kolumna])
+				{
+					if (maciezPopszednikow[wiersz1][kolumna] == 0) continue;
+					else return false;
+				}
+			}
+		}
+	}
+	
+	/*
 	for (int x = 0; x<liczbaWierzcholkow; x++)
 	{
 		if ( !((maciezPopszednikow[wiersz1][x] != maciezPopszednikow[wiersz2][x]) || (maciezPopszednikow[wiersz1][x] == 0 && maciezPopszednikow[wiersz2][x] == 0)))
@@ -103,7 +151,7 @@ bool sprawdzLinowosc(int wiersz1, int wiersz2, int k)
 			return false;
 		}
 	}
-
+	*/
 	return true;
 }
 
@@ -298,7 +346,7 @@ S:;
 	stozPopszedniki();
 	bool jestLiniowy = false;
 
-
+	/*
 	for (int wiersz1 = 0; wiersz1 < liczbaWierzcholkow; wiersz1++)
 	{
 		for (int wiersz2 = wiersz1 + 1; wiersz2 < liczbaWierzcholkow; wiersz2++)
@@ -317,11 +365,11 @@ S:;
 						jestLiniowy = false;
 						goto X;
 					}
-
 				}
 			}
 		}
 	}
+	*/
 X:;
 	if (jestLiniowy == true)
 	{
